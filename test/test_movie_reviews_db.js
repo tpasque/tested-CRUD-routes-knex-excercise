@@ -18,14 +18,14 @@ describe('Movie Reviews Database CRUD', function() {
     return knex.seed.run(knex.config);
   });
 
-  xit('should get all movie reviews for a given movie', function () {
+  it('should get all movie reviews for a given movie', function () {
     return Movies().where('title', 'The Great Beyond').first().then(function (movie) {
       return Reviews().where('movie_id', movie.id).then(function (reviews) {
         reviews.should.have.length(2)
       })
     });
   });
-  xit('should create a movie review', function () {
+  it('should create a movie review', function () {
     return Movies().where('title', 'Spiral Like A Boss').first().then(function (movie) {
       return Promise.all([
         Reviews().insert({
@@ -45,7 +45,7 @@ describe('Movie Reviews Database CRUD', function() {
       })
     })
   });
-  xit('should find a movie review', function () {
+  it('should find a movie review', function () {
     return Movies().where('title', 'Adventures in CRUD').first().then(function (movie) {
       return Reviews().where('movie_id', movie.id).then(function (reviews) {
         reviews.should.have.length(1);
@@ -54,7 +54,7 @@ describe('Movie Reviews Database CRUD', function() {
       })
     })
   });
-  xit('should update a movie review', function () {
+  it('should update a movie review', function () {
     var review_id;
     return Reviews().select().then(function (reviews) {
       review_id = reviews[0].id;
@@ -68,7 +68,7 @@ describe('Movie Reviews Database CRUD', function() {
       })
     })
   });
-  xit('should delete a movie review', function () {
+  it('should delete a movie review', function () {
     return Reviews().select().then(function (reviews) {
       numReviews = reviews.length;
       review_id = reviews[1].id;
